@@ -1,0 +1,2 @@
+# SimpleCropper
+WPF image cropper
