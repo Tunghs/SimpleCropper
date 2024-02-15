@@ -9,37 +9,49 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Wpf.Ui.Controls.Interfaces;
+using Wpf.Ui.Mvvm.Contracts;
+
 namespace SimpleCropper
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : INavigationWindow
     {
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void TitleBorder_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public void CloseWindow()
         {
-            this.DragMove();
-            e.Handled = true;
+
         }
 
-        private void ButtonGrid_MouseEnter(object sender, MouseEventArgs e)
+        public Frame GetFrame()
         {
-            //xPath.Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#4e74ba");
+            throw new NotImplementedException();
         }
 
-        private void ButtonGrid_MouseLeave(object sender, MouseEventArgs e)
+        public INavigation GetNavigation()
         {
-            //xPath.Fill = Brushes.CornflowerBlue;
+            throw new NotImplementedException();
         }
 
-        private void ButtonGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        public bool Navigate(Type pageType)
         {
-            //StartUpGrid.Visibility = Visibility.Collapsed;
+            throw new NotImplementedException();
+        }
+
+        public void SetPageService(IPageService pageService)
+        {
+            
+        }
+
+        public void ShowWindow()
+        {
+
         }
     }
 }
