@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:SimpleCropper"
         mc:Ignorable="d"
         Title="Simple Cropper" Height="450" Width="800"
-        Background="White"
+        Background="Transparent"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen" 
         WindowStyle="None">
@@ -39,9 +40,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="ParamHeaderTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
     </Window.Resources>
 
-    <Border CornerRadius="10" Background="White" BorderBrush="LightGray" BorderThickness="0.3">
+    <Border CornerRadius="10" 
+            Background="#fafafa" 
+            BorderBrush="Black" 
+            BorderThickness="0.3">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
@@ -63,7 +71,6 @@
 
                     <TextBlock Text="Grid Cropper"
                                VerticalAlignment="Center"
-                               FontFamily="D2Coding"
                                FontSize="16"
                                Margin="15 0 0 0"/>
 
@@ -73,41 +80,124 @@
                     <TextBlock Text="Tasks"
                                Grid.Column="2"
                                VerticalAlignment="Center"
-                               FontFamily="D2Coding"
                                FontSize="16"
                                Margin="15 0 0 0"/>
                 </Grid>
             </Border>
-
 
             <Grid Grid.Row="1" Background="Gray"/>
 
             <Grid Grid.Row="2"
                   x:Name="TaskGrid"
                   Margin="8">
-            </Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="240"/>
+                </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="2"
-                  x:Name="StartUpGrid"
-                  Background="White"
-                  Margin="5">
-                <Grid Width="120" Height="120"
-                      x:Name="ButtonGrid"
-                      MouseEnter="ButtonGrid_MouseEnter"
-                      MouseLeave="ButtonGrid_MouseLeave"
-                      MouseLeftButtonDown="ButtonGrid_MouseLeftButtonDown">
-                    <Viewbox Margin="-20">
-                        <Canvas Width="24" Height="24">
-                            <Rectangle Width="12" Height="12" 
-                                       Fill="White"
-                                       Canvas.Left="6"
-                                       Canvas.Top="6"/>
-                            <Path x:Name="xPath" Fill="CornflowerBlue"
-                                  Data="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z">
-                            </Path>
-                        </Canvas>
-                    </Viewbox>
-                </Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <ui:Card 
+                    VerticalAlignment="Stretch"
+                    VerticalContentAlignment="Stretch">
+
+                </ui:Card>
+
+                <ui:Card 
+                    Grid.Column="2"
+                    VerticalAlignment="Stretch"
+                    VerticalContentAlignment="Stretch">
+                    <DockPanel LastChildFill="True">
+                        <StackPanel 
+                            Orientation="Vertical"
+                            DockPanel.Dock="Top">
+                            <StackPanel
+                                Orientation="Horizontal">
+                                <ui:SymbolIcon 
+                                    Symbol="PositionToFront24"/>
+                                <TextBlock 
+                                    Text="Position"
+                                    Margin="5 0 0 0"
+                                    Style="{StaticResource ParamHeaderTextBlockStyle}"/>
+                            </StackPanel>
+
+                            <ui:NumberBox
+                                Margin="0 5 0 0"
+                                Icon="ArrowImport24"
+                                MaxDecimalPlaces="2"
+                                PlaceholderEnabled="True"
+                                Minimum="0"/>
+                            <ui:NumberBox
+                                Margin="0 5 0 0"
+                                Icon="ArrowDownload24"/>
+
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Margin="0 10 0 0">
+                                <ui:SymbolIcon 
+                                    Symbol="SelectObject24"/>
+                                <TextBlock 
+                                    Text="Size"
+                                    Margin="5 0 0 0"
+                                    Style="{StaticResource ParamHeaderTextBlockStyle}"/>
+                            </StackPanel>
+
+                            <ui:NumberBox
+                                Margin="0 5 0 0"
+                                Icon="AutoFitWidth24"/>
+                            <ui:NumberBox
+                                Margin="0 5 0 0"
+                                Icon="AutoFitHeight24"/>
+                        </StackPanel>
+
+                        <Grid 
+                            DockPanel.Dock="Top"
+                            Margin="0 10 0 0">
+                            <Ellipse 
+                                Width="180" Height="180"
+                                Fill="CornflowerBlue"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+
+                            </Ellipse>
+
+                            <Ellipse 
+                                Width="100" Height="100"
+                                Fill="White"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                            </Ellipse>
+                        </Grid>
+
+                        <Grid>
+
+                        </Grid>
+                    </DockPanel>
+                </ui:Card>
+
+                <Border Grid.Row="2"
+                        Background="White" 
+                        CornerRadius="10"
+                        BorderThickness="0.2"
+                        BorderBrush="Gray">
+                </Border>
+
+                <Border Grid.Row="2"
+                        Grid.Column="2"
+                        Background="CornflowerBlue" 
+                        CornerRadius="10"
+                        BorderThickness="0.2"
+                        BorderBrush="Gray">
+                    <TextBlock Text="Run"
+                               Foreground="White"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"/>
+                </Border>
             </Grid>
         </Grid>
     </Border>
