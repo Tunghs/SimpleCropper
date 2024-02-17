@@ -6,7 +6,9 @@
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:SimpleCropper"
         mc:Ignorable="d"
-        Title="Simple Cropper" Height="450" Width="800"
+        Title="Simple Cropper" 
+        Height="510" Width="800"
+        MinHeight="510" MinWidth="620"
         Background="Transparent"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen" 
@@ -99,7 +101,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="10"/>
-                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="35"/>
                 </Grid.RowDefinitions>
 
                 <ui:Card 
@@ -111,7 +113,8 @@
                 <ui:Card 
                     Grid.Column="2"
                     VerticalAlignment="Stretch"
-                    VerticalContentAlignment="Stretch">
+                    VerticalContentAlignment="Stretch"
+                    Padding="5">
                     <DockPanel LastChildFill="True">
                         <StackPanel 
                             Orientation="Vertical"
@@ -166,12 +169,23 @@
 
                             </Ellipse>
 
-                            <Ellipse 
-                                Width="100" Height="100"
-                                Fill="White"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-                            </Ellipse>
+                            <Grid x:Name="DialogButtonGrid">
+                                <Ellipse 
+                                    Width="100" Height="100"
+                                    Fill="White"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                </Ellipse>
+
+                                
+                                <Viewbox
+                                    Margin="50">
+                                    <ui:SymbolIcon
+                                        Symbol="FolderAdd24"
+                                        Foreground="CornflowerBlue"/>
+                                </Viewbox>
+                            </Grid>
+
                         </Grid>
 
                         <Grid>
@@ -180,24 +194,20 @@
                     </DockPanel>
                 </ui:Card>
 
-                <Border Grid.Row="2"
-                        Background="White" 
-                        CornerRadius="10"
-                        BorderThickness="0.2"
-                        BorderBrush="Gray">
-                </Border>
+                <ui:Card Grid.Row="2">
+                    
+                </ui:Card>
 
-                <Border Grid.Row="2"
-                        Grid.Column="2"
-                        Background="CornflowerBlue" 
-                        CornerRadius="10"
-                        BorderThickness="0.2"
-                        BorderBrush="Gray">
-                    <TextBlock Text="Run"
-                               Foreground="White"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"/>
-                </Border>
+                <ui:Button 
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="CornflowerBlue"
+                    Content="Run"
+                    Foreground="White"
+                    MouseOverBackground="#4e74ba"
+                    PressedBackground="CornflowerBlue"/>
             </Grid>
         </Grid>
     </Border>
