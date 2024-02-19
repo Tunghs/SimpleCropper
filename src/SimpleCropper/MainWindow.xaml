@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:controls="clr-namespace:SimpleCropper.Controls.Controls;assembly=SimpleCropper.Controls"
         xmlns:local="clr-namespace:SimpleCropper"
         mc:Ignorable="d"
         Title="Simple Cropper" 
@@ -68,10 +69,9 @@
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="0.2"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="200"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Grid Cropper"
+                    <TextBlock Text="Simple Cropper"
                                VerticalAlignment="Center"
                                FontSize="16"
                                Margin="15 0 0 0"/>
@@ -79,11 +79,6 @@
                     <Grid Grid.Column="1" 
                           Background="Gray"/>
 
-                    <TextBlock Text="Tasks"
-                               Grid.Column="2"
-                               VerticalAlignment="Center"
-                               FontSize="16"
-                               Margin="15 0 0 0"/>
                 </Grid>
             </Border>
 
@@ -95,7 +90,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="240"/>
+                    <ColumnDefinition Width="220"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -107,7 +102,27 @@
                 <ui:Card 
                     VerticalAlignment="Stretch"
                     VerticalContentAlignment="Stretch">
-
+                    <Grid>
+                        <Grid Margin="-5">
+                            <controls:CropViewer x:Name="PART_CropViewer"/>
+                        </Grid>
+                        
+                        <Grid x:Name="AddDirectoryIconGrid"
+                              Background="White"
+                              Margin="-5"
+                              MouseEnter="ButtonGrid_MouseEnter"
+                              MouseLeave="ButtonGrid_MouseLeave"
+                              MouseLeftButtonDown="ButtonGrid_MouseLeftButtonDown">
+                            <Viewbox
+                                Width="200"
+                                Height="200">
+                                <ui:SymbolIcon
+                                    x:Name="AddDirectoryIcon"
+                                    Symbol="FolderAdd24"
+                                    Foreground="CornflowerBlue"/>
+                            </Viewbox>
+                        </Grid>
+                    </Grid>
                 </ui:Card>
 
                 <ui:Card 
@@ -161,30 +176,6 @@
                         <Grid 
                             DockPanel.Dock="Top"
                             Margin="0 10 0 0">
-                            <Ellipse 
-                                Width="180" Height="180"
-                                Fill="CornflowerBlue"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
-
-                            </Ellipse>
-
-                            <Grid x:Name="DialogButtonGrid">
-                                <Ellipse 
-                                    Width="100" Height="100"
-                                    Fill="White"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center">
-                                </Ellipse>
-
-                                
-                                <Viewbox
-                                    Margin="50">
-                                    <ui:SymbolIcon
-                                        Symbol="FolderAdd24"
-                                        Foreground="CornflowerBlue"/>
-                                </Viewbox>
-                            </Grid>
 
                         </Grid>
 
@@ -197,8 +188,9 @@
                 <ui:Card Grid.Row="2">
                     
                 </ui:Card>
-
+                    
                 <ui:Button 
+                    x:Name="RunBtn"
                     Grid.Row="2"
                     Grid.Column="2"
                     HorizontalAlignment="Stretch"
@@ -207,7 +199,8 @@
                     Content="Run"
                     Foreground="White"
                     MouseOverBackground="#4e74ba"
-                    PressedBackground="CornflowerBlue"/>
+                    PressedBackground="CornflowerBlue"
+                    Click="RunBtn_Click"/>
             </Grid>
         </Grid>
     </Border>

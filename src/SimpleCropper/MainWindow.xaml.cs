@@ -1,4 +1,7 @@
-﻿using System.Text;
+﻿using Microsoft.Win32;
+
+using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -16,6 +19,9 @@ namespace SimpleCropper
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string _selectedDirectory = string.Empty;
+        readonly string[] _supportedExtentions = { ".jpg", ".png", ".bmp", ".tiff" };
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,17 +35,53 @@ namespace SimpleCropper
 
         private void ButtonGrid_MouseEnter(object sender, MouseEventArgs e)
         {
-            //xPath.Fill = (SolidColorBrush)new BrushConverter().ConvertFrom("#4e74ba");
+            AddDirectoryIcon.Foreground = (SolidColorBrush)new BrushConverter().ConvertFrom("#4e74ba");
         }
 
         private void ButtonGrid_MouseLeave(object sender, MouseEventArgs e)
         {
-            //xPath.Fill = Brushes.CornflowerBlue;
+            AddDirectoryIcon.Foreground = Brushes.CornflowerBlue;
         }
 
         private void ButtonGrid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            //StartUpGrid.Visibility = Visibility.Collapsed;
+            OpenFolderDialog dialog = new OpenFolderDialog();
+            dialog.Title = "Select Folder";
+            dialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dialog.Multiselect = false; 
+
+            if (dialog.ShowDialog() == true)
+            {
+                _selectedDirectory = dialog.FolderName;
+                ShowFirstImageOfDirectory();
+                AddDirectoryIconGrid.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void ShowFirstImageOfDirectory()
+        {
+            var filePaths = Directory.EnumerateFiles(_selectedDirectory, "*.*", SearchOption.AllDirectories);
+            string? firstImagePath = filePaths.FirstOrDefault(s => _supportedExtentions.Any(x => s.ToLower().EndsWith(x)));
+            if (firstImagePath == null)
+            {
+                return;
+            }
+
+            PART_CropViewer.ImageSource = new BitmapImage(new Uri(firstImagePath, UriKind.Absolute));
+        }
+
+        private void RunBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+            AddDirectoryIconGrid.Visibility = Visibility.Visible;
+        }
+
+        private void CropImages()
+        {
+            var filePaths = Directory.EnumerateFiles(_selectedDirectory, "*.*", SearchOption.AllDirectories)
+                .Where(s => _supportedExtentions.Any(x => s.ToLower().EndsWith(x)));
         }
     }
 }
