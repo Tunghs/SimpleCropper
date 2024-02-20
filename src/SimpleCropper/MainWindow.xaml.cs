@@ -72,7 +72,7 @@ namespace SimpleCropper
 
         private void RunBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            // 동작 코드 추가
 
 
             AddDirectoryIconGrid.Visibility = Visibility.Visible;
